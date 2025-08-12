@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
+import Link from "next/link"
 
 export default function HomePage() {
   const [token, setToken] = useState<string | null>(null)
@@ -8,6 +10,7 @@ export default function HomePage() {
   const [loading, setLoading] = useState<boolean>(true) // To manage loading state
   const [inputText, setInputText] = useState<string>("") // State for the text input field
   const [itemId, setItemId] = useState<string>("") // State for the item ID for DELETE, GET, PUT
+  const router = useRouter()
 
   useEffect(() => {
     const savedToken = localStorage.getItem('IdToken')
@@ -15,6 +18,11 @@ export default function HomePage() {
       setToken(savedToken)
     }
   }, [])
+
+  const logout = () => {
+    localStorage.removeItem('IdToken')
+    router.push('/')
+  }
 
   const getData = async () => {
     if (!token) return
@@ -199,6 +207,20 @@ export default function HomePage() {
         >
           Delete Item
         </button>
+        <button
+          onClick={logout}
+          className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition"
+        >
+          Logout
+        </button>
+        <button
+          className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition"
+        >
+          <Link href="/test" className="text-white">
+            Go to test
+          </Link>
+        </button>
+
       </div>
 
       <div>
@@ -212,6 +234,7 @@ export default function HomePage() {
           </div>
         ))}
       </div>
+      
     </div>
   )
 }
