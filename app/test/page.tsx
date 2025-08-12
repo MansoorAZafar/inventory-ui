@@ -8,7 +8,7 @@ import { Trash2 } from 'lucide-react'
 import Link from "next/link"
 import {CircleDollarSign} from 'lucide-react'
 import {HandCoins} from 'lucide-react'
-import {ScanBarcode} from 'lucide-react'
+import {Info} from 'lucide-react'
 
 const manrope = Manrope({ subsets: ['latin'] })
 
@@ -230,13 +230,10 @@ const Main = () => {
             </div> */}
 
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between w-full gap-2">
-              <div className="flex items-center">
-                <ScanBarcode className="inline mr-2" />
-                <h4 className="font-semibold text-sm sm:w-1/3 text-nowrap" title={post.id}>
-                  {post.id}
-                </h4>
+              <div className="flex-shrink-0">
+                <Info className="inline mr-2" />
               </div>
-              <p className="font-semibold text-base sm:w-2/3 break-words">
+              <p className="flex-1 text-center font-semibold text-base break-words">
                 {post.name}
               </p>
             </div>
