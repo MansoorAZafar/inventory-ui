@@ -9,6 +9,7 @@ import Link from "next/link"
 import {CircleDollarSign} from 'lucide-react'
 import {HandCoins} from 'lucide-react'
 import {Info} from 'lucide-react'
+import InfoModal from "@/components/infoModal"
 
 const manrope = Manrope({ subsets: ['latin'] })
 
@@ -19,6 +20,8 @@ const Main = () => {
     const [inputText, setInputText] = useState<string>("") // State for the text input field
     const [itemId, setItemId] = useState<string>("") // State for the item ID for DELETE, GET, PUT
     const [filteredPosts, setFilteredPosts] = useState<any[]>([]) // state to store filtered posts
+    const [modalOpen, setModalOpen] = useState(false);
+    const [selectedItem, setSelectedItem] = useState<any>(null);
 
     useEffect(() => {
       const savedToken = localStorage.getItem('IdToken')
@@ -231,7 +234,12 @@ const Main = () => {
 
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between w-full gap-2">
               <div className="flex-shrink-0">
-                <Info className="inline mr-2" />
+                <button
+                  className="px-2 hover:scale-105 hover:text-blue-600 transition-all duration-300 cursor-pointer"
+                  onClick={() => { setSelectedItem(post); setModalOpen(true); }}
+                >
+                  <Info className="inline mr-2" />
+                </button>
               </div>
               <p className="flex-1 text-center font-semibold text-base break-words">
                 {post.name}
@@ -257,6 +265,7 @@ const Main = () => {
         
           </div>
         ))}
+        <InfoModal isOpen={modalOpen} setIsOpen={setModalOpen} item={selectedItem} />
       </div>
 
     </div>
