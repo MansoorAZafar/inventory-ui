@@ -8,14 +8,14 @@ export default function Login() {
   const logGoogleUser = async () => {
     try {
       if(localStorage.getItem('IdToken')) {
-        router.push('/home')
+        router.push('/inventory')
         return;
       }
 
       const response = await popupSignIn();
       console.log(response.user)
       localStorage.setItem('IdToken', await response.user.getIdToken());
-      router.push('/home')
+      router.push('/inventory')
           
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (e) {}

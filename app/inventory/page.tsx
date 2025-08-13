@@ -1,11 +1,12 @@
 "use client"
 import { useEffect, useState } from "react"
 import React from 'react'
+import { useRouter } from "next/navigation"
 import { Manrope } from "next/font/google"
 import { BadgePlus} from 'lucide-react'
 import {Pen} from 'lucide-react'
 import { Trash2 } from 'lucide-react'
-import Link from "next/link"
+import {LogOut} from 'lucide-react'
 import {CircleDollarSign} from 'lucide-react'
 import {HandCoins} from 'lucide-react'
 import {Info} from 'lucide-react'
@@ -30,6 +31,7 @@ const Main = () => {
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const [deleteItem, setDeleteItem] = useState<any>(null);
     const [createModalOpen, setCreateModalOpen] = useState(false);
+    const router = useRouter()
 
 
     useEffect(() => {
@@ -45,6 +47,11 @@ const Main = () => {
     );
       setFilteredPosts(results)
     }, [inputText, posts])
+
+    const logout = () => {
+    localStorage.removeItem('IdToken')
+    router.push('/')
+    }
 
 
     const getData = async () => {
@@ -156,8 +163,24 @@ const Main = () => {
 
   return (
     <div className={`flex justify-center items-center flex-col m-auto p-6 max-w-7xl text-center ${manrope.className}`}>
-      <h1 className="text-4xl font-bold mb-4">Welcome to the Inventory</h1>
-      <p className="text-lg mb-6">This is the main content area.</p>
+      <div className="relative w-full mt-3 mb-6">
+        {/* Title centered absolutely */}
+        <h1 className="text-4xl font-bold mb-4 text-center w-full absolute left-0 top-0">
+          Welcome to the Inventory
+        </h1>
+        {/* Logout button: right for sm+, below for mobile */}
+        <div className="flex flex-col sm:flex-row items-center justify-center w-full relative" style={{ minHeight: '4rem' }}>
+          <div className="flex-1" />
+          <button
+            className="sm:absolute sm:right-0 sm:top-0 sm:w-auto w-full mt-24 sm:mt-0 hover:scale-125 hover:text-purple-600 transition-all duration-300 cursor-pointer flex items-center justify-center font-semibold"
+            onClick={logout}
+          >
+            Logout
+            <LogOut className="inline ml-1 mr-2" />
+          </button>
+        </div>
+      </div>
+
       <div className="flex justify-center items-center m-6 gap-3 flex-row">
         <input
           type="text"
@@ -168,13 +191,12 @@ const Main = () => {
         />
       </div>
         <div className="mt-6 mb-4 flex flex-wrap justify-center flex-row gap-4 ">
-                <span className="mb-0.5 font-bold rounded-lg text-lg bg-blue-100 text-blue-800 px-4 py-1 hover:ring-2 hover:scale-110 transition-all duration-300"
-                onClick={() => setCreateModalOpen(true)}
-                >
-                  <BadgePlus className="inline mr-2" />
-                  Create
-                </span>
-
+          <span className="mb-0.5 font-bold rounded-lg text-lg bg-blue-100 text-blue-800 px-4 py-1 hover:ring-2 hover:scale-110 transition-all duration-300"
+          onClick={() => setCreateModalOpen(true)}
+          >
+            <BadgePlus className="inline mr-2" />
+            Create
+          </span>
         </div>
       <p className="text-lg mb-6">A list of all items within the database</p>
       <div className=" flex flex-wrap justify-center items-center gap-4 flex-row w-full ">
