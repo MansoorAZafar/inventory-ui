@@ -163,7 +163,7 @@ const Main = () => {
 
   return (
     <div className={`flex justify-center items-center flex-col m-auto p-6 max-w-7xl text-center ${manrope.className}`}>
-      <div className="relative w-full mt-3 mb-6">
+      <div className="relative w-full mt-3 mb-4">
         {/* Title centered absolutely */}
         <h1 className="text-4xl font-bold mb-4 text-center w-full absolute left-0 top-0">
           Welcome to the Inventory
@@ -191,7 +191,7 @@ const Main = () => {
         />
       </div>
         <div className="mt-6 mb-4 flex flex-wrap justify-center flex-row gap-4 ">
-          <span className="mb-0.5 font-bold rounded-lg text-lg bg-blue-100 text-blue-800 px-4 py-1 hover:ring-2 hover:scale-110 transition-all duration-300"
+          <span className="mb-0.5 font-bold rounded-lg text-lg bg-blue-100 text-blue-800 px-4 py-1 hover:ring-2 hover:scale-110 transition-all duration-300 cursor-pointer"
           onClick={() => setCreateModalOpen(true)}
           >
             <BadgePlus className="inline mr-2" />

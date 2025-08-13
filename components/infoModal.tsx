@@ -73,7 +73,7 @@ export default function InfoModal({ isOpen, setIsOpen , item}: InfoModalProps) {
                         <Barcode className="inline mr-2" />
                       ID: {item?.id}<br />
                     <CircleDollarSign className="inline mr-2" />
-                    Price: {item?.price}.<br />
+                    Price: {item?.price}<br />
                     <HandCoins className="inline mr-2" />
                     Quantity: {item?.quantity}<br />
                     </p>
